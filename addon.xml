@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="interface.kodi.git" name="KoGit" version="0.1.0" provider-name="Gaibe">
+    <requires>
+        <import addon="xbmc.python" version="2.14.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="addon.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Popup Hello World</summary>
+        <description lang="en">Example Script to show hello world</description>
+        <license>GNU General Public License, v2</license>
+        <language>en</language>
+        <source>https://github.com/Gaibe/KoGit</source>
+        <email>gaibe--ct--@live.fr</email>
+    </extension>
+</addon>
