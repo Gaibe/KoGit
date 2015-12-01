@@ -1,6 +1,2 @@
-v0.1 :
-- Structure de l'application
-- Instalation de Git
-
 v1.0 :
 - Récuperation des repositories sur GitHub

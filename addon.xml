@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="interface.kodi.git" name="KoGit" version="0.1.0" provider-name="Gaibe">
+<addon id="script.kodi.git" name="KoGit" version="0.1.0" provider-name="Gaibe">
     <requires>
         <import addon="xbmc.python" version="2.14.0"/>
     </requires>
@@ -8,8 +8,8 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
-        <summary lang="en">Popup Hello World</summary>
-        <description lang="en">Example Script to show hello world</description>
+        <summary lang="en">Download addon easily from a git repository</summary>
+        <description lang="en">You want to download your addon from a repository on GitHub ? Nothing easily ! Use KoGit</description>
         <license>GNU General Public License, v2</license>
         <language>en</language>
         <source>https://github.com/Gaibe/KoGit</source>
