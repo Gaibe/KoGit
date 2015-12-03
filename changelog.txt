@@ -1,2 +1,2 @@
 v1.0 :
-- Récuperation des repositories sur GitHub
+- Download repositories from Github

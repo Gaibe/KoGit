@@ -1,0 +1,28 @@
+# Kodi Media Center language file
+# Addon Name: KoGit addon
+# Addon id: script.kogit
+# Addon Provider: Gaibe
+
+msgid ""
+msgstr ""
+"Project-Id-Version: KoGit\n"
+"POT-Creation-Date: 2015-12-03 00:34+0100\n"
+"PO-Revision-Date: 2015-12-03 18:55+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: \n"
+"X-Poedit-Basepath: \n"
+"Language: English\n"
+
+
+msgctxt "#32001"
+msgid "GitHub"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Error message"
+msgstr ""
