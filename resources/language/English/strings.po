@@ -26,3 +26,7 @@ msgstr ""
 msgctxt "#32002"
 msgid "Error message"
 msgstr ""
+
+msgctxt "#32010"
+msgid "Close"
+msgstr ""
