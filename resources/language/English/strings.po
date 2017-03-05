@@ -19,14 +19,18 @@ msgstr ""
 "Language: English\n"
 
 
-msgctxt "#32001"
-msgid "GitHub"
-msgstr ""
-
 msgctxt "#32002"
 msgid "Error message"
 msgstr ""
 
 msgctxt "#32010"
 msgid "Close"
+msgstr ""
+
+msgctxt "#32020"
+msgid "Type search"
+msgstr ""
+
+msgctxt "#32101"
+msgid "GitHub"
 msgstr ""

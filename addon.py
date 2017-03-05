@@ -1,37 +1,25 @@
 import sys
-import xbmcaddon
 import xbmc
 import xbmcgui
 import gui
 from lib import tools
-from lib.github import *
+from lib import info
+from lib import github
 
-addon               = xbmcaddon.Addon()
-addonname           = addon.getAddonInfo('name')
-launchAtStartUp     = addon.getSetting("launch-at-startup")
+__addonname__       = info.__addonname__
 translate           = tools.translate
 
-# TODO : resoudre le probleme avec sys.argv dans gui.py
 
-gui.addItem("Mabite")
-gui.endGui()
-
-
-
-# while True:
-#     index = xbmcgui.Dialog().select(addonname, [translate(32001)])
-#     if index == 0:
-#         # GitHub selected
-#         to_search = "2sec"
-#         search_result = getSearchGitHub({ "q" : to_search })
-
-#         xbmcgui.Dialog().ok(addonname, search_result["items"][1]["downloads_url"], line2, line3)
-#         break
-#     else:
-#         break
-
-
-# Start of script
-# if (__name__ == '__main__'):
-#     window = window()
-#     window.doModal()
+while True:
+    index = xbmcgui.Dialog().select(__addonname__, [translate(32101)])
+    # GitHub selected
+    if index == 0:
+        keyboard = xbmc.Keyboard('2sec', translate(32020))
+        keyboard.doModal()
+        if keyboard.isConfirmed():
+            value_search = keyboard.getText()
+            search_result = github.getSearchResult({ 'q' : value_search })
+            xbmcgui.Dialog().ok(__addonname__, search_result['items'][1]['downloads_url'])
+        break
+    else:
+        break
