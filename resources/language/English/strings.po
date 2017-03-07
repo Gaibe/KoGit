@@ -31,6 +31,14 @@ msgctxt "#32020"
 msgid "Type search"
 msgstr ""
 
+msgctxt "#32021"
+msgid "Searching for result"
+msgstr ""
+
+msgctxt "#32022"
+msgid "Search result"
+msgstr ""
+
 msgctxt "#32101"
 msgid "GitHub"
 msgstr ""
