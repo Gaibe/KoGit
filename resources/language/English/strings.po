@@ -20,7 +20,7 @@ msgstr ""
 
 
 msgctxt "#32002"
-msgid "Error message"
+msgid "An error has occured, please try again"
 msgstr ""
 
 msgctxt "#32010"
@@ -41,4 +41,12 @@ msgstr ""
 
 msgctxt "#32101"
 msgid "GitHub"
+msgstr ""
+
+msgctxt "#32102"
+msgid "Error on GitHub request"
+msgstr ""
+
+msgctxt "#32103"
+msgid "Error on downloading Github repository"
 msgstr ""

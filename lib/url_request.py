@@ -1,5 +1,4 @@
 from urllib2 import Request, urlopen, URLError
-from lib.tools import errorMessage
 
 # Make a request on a URL
 # Can include a list data to query URL
@@ -23,7 +22,13 @@ def request(url, data, header):
         if header:
             for key, value in header.iteritems():
                 req.add_header(key, value)
-
         return urlopen(req)
-    except URLError, e:
-        errorMessage()
+    except Exception as e:
+        xbmc.log(msg=e.message, level=xbmc.LOGERROR)
+        raise Exception('Error on request')
+
+# Download a file from url
+def download(path, url):
+    f = open(path,'wb')
+    f.write(urlopen(url).read())
+    f.close()
