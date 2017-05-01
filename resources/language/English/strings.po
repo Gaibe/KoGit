@@ -27,6 +27,14 @@ msgctxt "#32010"
 msgid "Close"
 msgstr ""
 
+msgctxt "#32011"
+msgid "Download"
+msgstr ""
+
+msgctxt "#32012"
+msgid "Modify"
+msgstr ""
+
 msgctxt "#32020"
 msgid "Type search"
 msgstr ""
@@ -37,6 +45,34 @@ msgstr ""
 
 msgctxt "#32022"
 msgid "Search result"
+msgstr ""
+
+msgctxt "#32023"
+msgid "Name:"
+msgstr ""
+
+msgctxt "#32024"
+msgid "Author:"
+msgstr ""
+
+msgctxt "#32025"
+msgid "Addon name:"
+msgstr ""
+
+msgctxt "#32026"
+msgid "Addon path:"
+msgstr ""
+
+msgctxt "#32027"
+msgid "You entered one of these invalid characters:"
+msgstr ""
+
+msgctxt "#32030"
+msgid "TODELAre you sure you want to install this repository ?"
+msgstr ""
+
+msgctxt "#32031"
+msgid "Downloading"
 msgstr ""
 
 msgctxt "#32101"

@@ -18,30 +18,32 @@ request_header  = { 'Accept' : 'application/vnd.github.v3.text-match+json' }
 url_api         = 'https://api.github.com'
 # Path to make a search for Github
 path_search     = '/search/repositories'
-
+# Path of temporary folder
 tmpPath         = os.path.join(__addonpath__, 'tmp')
 
 # Download a repository from Github
 def downloadRepository(repository):
-    if not xbmcvfs.exists(tmpPath + '/'):
-        xbmcvfs.mkdir(tmpPath)
-    pathToZip = tmpPath + '/' + tools.randomID() + '.zip'
-    pathToAddon = os.path.dirname(__addonpath__) + '/' + repository['name']
+    generatedTmpPath = tmpPath + '/' + tools.randomID()
+    if not xbmcvfs.exists(generatedTmpPath + '/'):
+        xbmcvfs.mkdir(generatedTmpPath)
+    pathToZip = generatedTmpPath + '/' + repository.name + '.zip'
+    pathToAddon = os.path.dirname(__addonpath__) + '/' + repository.name
     if not xbmcvfs.exists(pathToAddon + '/'):
         xbmcvfs.mkdir(pathToAddon)
     try:
-        url_request.download(pathToZip,getDownloadPath(repository['full_name'],repository['default_branch']))
+        url_request.download(pathToZip,getDownloadPath(repository.fullName,repository.defaultBranch))
     except Exception as e:
         xbmc.log(msg=e.message, level=xbmc.LOGERROR)
         raise Exception(tools.translate(32103))
     try:
-        tools.unzip(pathToZip,pathToAddon)
-        shutil.rmtree(tmpPath)
+        tools.unzip(pathToZip,generatedTmpPath)
+        folderName = os.listdir(generatedTmpPath)[0]
     except Exception as e:
         xbmc.log(msg=e.message, level=xbmc.LOGERROR)
-        # shutil.rmtree(tmpPath)
         raise Exception(e.message)
+    # shutil.rmtree(tmpPath)
 
+# Get the complete path to download repository as zip
 def getDownloadPath(fullName, defaultBranch):
     return url_api + '/repos/' + fullName + '/zipball/' + defaultBranch
 

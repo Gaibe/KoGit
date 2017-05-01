@@ -5,11 +5,20 @@ import xbmcgui
 from zipfile import ZipFile
 from lib import info
 
+invalidFilesCharacters = ['\\','/',':','*','?','"','<','>','|']
+
 def errorMessage(msg=''):
     if msg=='':
         msg=translate(32002)
-    xbmc.log(msg=msg, level=xbmc.LOGERROR)
+    else:
+        xbmc.log(msg=msg, level=xbmc.LOGERROR)
     return xbmcgui.Dialog().ok(info.__addonname__ + ' : Error', msg)
+
+def hasInvalidFilesCharacters(fileName):
+    isInvalid = False
+    if any(letter in fileName for letter in invalidFilesCharacters):
+        isInvalid = True
+    return isInvalid
 
 def randomID():
     return str(uuid.uuid4())[:10]
