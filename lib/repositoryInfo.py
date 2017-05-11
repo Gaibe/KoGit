@@ -1,9 +1,16 @@
+from tools import translate
 
 class repositoryInfo:
 
     def __init__(self,server, data):
         if server == 'github':
             self.setInfoFromGithub(data)
+
+    def getRepoInfo(self):
+        return translate(32023) + ' ' + self.name\
+         + '\n' + translate(32024) + ' ' + self.ownerName\
+         + '\n' + translate(32025) + ' ' + self.addonName\
+         + '\n' + translate(32026) + ' ' + self.getRepoPathToAddon()
 
     def getRepoPathToAddon(self):
         return '/' + self.addonPath + '/'

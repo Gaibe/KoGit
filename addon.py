@@ -38,14 +38,10 @@ class Main:
                             indexResult=dialog.select(translate(32022), listResults)
                             if indexResult >= 0:
                                 selectedResult=repositoryInfo(serverSelected,searchResult['items'][indexResult])
-                                repoInfo = translate(32023) + ' ' + selectedResult.name\
-                                 + '\n' + translate(32024) + ' ' + selectedResult.ownerName\
-                                 + '\n' + translate(32025) + ' ' + selectedResult.addonName\
-                                 + '\n' + translate(32026) + ' ' + selectedResult.getRepoPathToAddon()
                                 modifyDownload = dialog.yesno(heading=__addonname__,
-                                    line1=repoInfo,
-                                    yeslabel=translate(32012),
-                                    nolabel=translate(32011))
+                                        line1=repoInfo.getRepoInfo(),
+                                        yeslabel=translate(32012),
+                                        nolabel=translate(32011))
                                 if modifyDownload == False:
                                     self.download(serverSelected,selectedResult)
                                     break
@@ -91,6 +87,7 @@ class Main:
             indexModify = dialog.select(__addonname__,selectModifyList)
             if indexModify >= 0:
                 if indexModify == 0:
+                    # Modify name
                     validNewName = False
                     while validNewName == False:
                         newName = dialog.input(__addonname__,selectedResult.name,xbmcgui.INPUT_ALPHANUM)
@@ -102,7 +99,10 @@ class Main:
                                     translate(32027) + '\n' + (', '.join(tools.invalidFilesCharacters)))
                             else:
                                 resultHasChange = True
-                                selectedResult.name=newName
+                                selectedResult.name = newName
+                elif indexModify == 1:
+                    # Modify path
+                    dialog.browseSingle(0,__addonname__,)
             else:
                 break
         if resultHasChange == True:

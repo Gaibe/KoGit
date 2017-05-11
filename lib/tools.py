@@ -1,3 +1,4 @@
+import os
 import uuid
 import xbmc
 import xbmcaddon
@@ -5,7 +6,10 @@ import xbmcgui
 from zipfile import ZipFile
 from lib import info
 
-invalidFilesCharacters = ['\\','/',':','*','?','"','<','>','|']
+# List of invalid characters for file name
+invalidFilesCharacters  = ['\\','/',':','*','?','"','<','>','|']
+# Path of temporary folder
+tmpPath                 = os.path.join(info.__addonpath__, 'tmp')
 
 def errorMessage(msg=''):
     if msg=='':
