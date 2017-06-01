@@ -22,31 +22,37 @@ class Main:
                 if keyboard.isConfirmed():
                     value_search = keyboard.getText()
                     dialogProgress.create(__addonname__,translate(32021),'...')
-                    dialogProgress.update(20,translate(32021),'...')
                     try:
+                        dialogProgress.update(20,translate(32021),'...')
                         # Search for results
                         if indexServer == 0:
                             # GitHub selected
-                            serverSelected='github'
+                            self.serverSelected='github'
                             searchResult = github.getSearchResult({ 'q' : value_search })
+                        if dialogProgress.iscanceled():
+                            dialogProgress.close()
+                            continue
                         dialogProgress.update(50,translate(32021),'...')
                         listResults = self.getResult(searchResult)
+                        if dialogProgress.iscanceled():
+                            dialogProgress.close()
+                            continue
                         dialogProgress.update(100,translate(32021),'...')
                         dialogProgress.close()
                         while True:
-                            # Display Results
+                            # Display Results of search
                             indexResult=dialog.select(translate(32022), listResults)
                             if indexResult >= 0:
-                                selectedResult=repositoryInfo(serverSelected,searchResult['items'][indexResult])
+                                self.selectedResult=repositoryInfo(self.serverSelected,searchResult['items'][indexResult])
                                 modifyDownload = dialog.yesno(heading=__addonname__,
-                                        line1=repoInfo.getRepoInfo(),
+                                        line1=self.selectedResult.getRepoInfo(),
                                         yeslabel=translate(32012),
                                         nolabel=translate(32011))
                                 if modifyDownload == False:
-                                    self.download(serverSelected,selectedResult)
+                                    self.download()
                                     break
                                 else:
-                                    self.modifyRepoInfo(selectedResult)
+                                    self.modifyRepoInfo()
                                     break
                             else:
                                 break
@@ -60,11 +66,11 @@ class Main:
             else:
                 break
 
-    def download(self, serverSelected, selectedResult):
+    def download(self):
         dialogProgress.create(__addonname__,translate(32031),'...')
         dialogProgress.update(35,translate(32031),'...')
-        if serverSelected == 'github':
-            github.downloadRepository(selectedResult)
+        if self.serverSelected == 'github':
+            github.downloadRepository(self.selectedResult)
         dialogProgress.update(100,translate(32031),'...')
         dialogProgress.close()
 
@@ -79,18 +85,19 @@ class Main:
                 listResult.append(displayedResult.encode('utf-8', 'ignore'))
         return listResult
 
-    def modifyRepoInfo(self, selectedResult):
+    def modifyRepoInfo(self):
         resultHasChange = False
         while True:
-            selectModifyList = [translate(32025) + ' ' + selectedResult.name,
-                    translate(32026) + ' ' + selectedResult.getRepoPathToAddon()]
-            indexModify = dialog.select(__addonname__,selectModifyList)
+            selectModifyList = [translate(32025) + ' ' + self.selectedResult.name,
+                    translate(32026) + ' ' + self.selectedResult.getRepoPathToAddon(),
+                    translate(32012)]
+            indexModify = dialog.select(__addonname__+' - Modify repository info',selectModifyList)
             if indexModify >= 0:
                 if indexModify == 0:
                     # Modify name
                     validNewName = False
                     while validNewName == False:
-                        newName = dialog.input(__addonname__,selectedResult.name,xbmcgui.INPUT_ALPHANUM)
+                        newName = dialog.input(__addonname__,self.selectedResult.name,xbmcgui.INPUT_ALPHANUM)
                         validNewName = True
                         if newName != '':
                             if tools.hasInvalidFilesCharacters(newName):
@@ -99,10 +106,13 @@ class Main:
                                     translate(32027) + '\n' + (', '.join(tools.invalidFilesCharacters)))
                             else:
                                 resultHasChange = True
-                                selectedResult.name = newName
+                                self.selectedResult.name = newName
                 elif indexModify == 1:
                     # Modify path
                     dialog.browseSingle(0,__addonname__,)
+                elif indexModify == 2:
+                    # Download repo
+                    self.download()
             else:
                 break
         if resultHasChange == True:

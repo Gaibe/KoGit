@@ -1,2 +1,5 @@
 v1.0 :
 - Download repositories from Github
+
+v1.1 :
+- Option to check and modify informations
