@@ -52,8 +52,9 @@ class Main:
                                     self.download()
                                     break
                                 else:
-                                    self.modifyRepoInfo()
-                                    break
+                                    hasDownloaded = self.modifyRepoInfo()
+                                    if hasDownloaded == True:
+                                        break
                             else:
                                 break
                         break
@@ -87,10 +88,11 @@ class Main:
 
     def modifyRepoInfo(self):
         resultHasChange = False
+        hasDownloaded = False
         while True:
             selectModifyList = [translate(32025) + ' ' + self.selectedResult.name,
                     translate(32026) + ' ' + self.selectedResult.getRepoPathToAddon(),
-                    translate(32012)]
+                    translate(32011)]
             indexModify = dialog.select(__addonname__+' - Modify repository info',selectModifyList)
             if indexModify >= 0:
                 if indexModify == 0:
@@ -113,10 +115,18 @@ class Main:
                 elif indexModify == 2:
                     # Download repo
                     self.download()
+                    hasDownloaded = True
             else:
-                break
-        if resultHasChange == True:
-            self.download(serverSelected,selectedResult)
+                if resultHasChange == True:
+                    discardChange = dialog.yesno(heading=__addonname__,
+                            line1='Are you sure you want to discard change ?',
+                            yeslabel='Discard',
+                            nolabel='Cancel')
+                    if discardChange == True:
+                        break
+                else:
+                    break
+        return hasDownloaded
 
 ### Iniatilize script ###
 if (__name__ == '__main__'):
