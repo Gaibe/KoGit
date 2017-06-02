@@ -35,6 +35,16 @@ msgctxt "#32012"
 msgid "Modify"
 msgstr ""
 
+msgctxt "#32013"
+msgid "Cancel"
+msgstr ""
+
+msgctxt "#32014"
+msgid "Discard"
+msgstr ""
+
+Are you sure you want to discard change ?
+
 msgctxt "#32020"
 msgid "Type search"
 msgstr ""
@@ -67,8 +77,12 @@ msgctxt "#32027"
 msgid "You entered one of these invalid characters:"
 msgstr ""
 
-msgctxt "#32030"
-msgid "TODELAre you sure you want to install this repository ?"
+msgctxt "#32028"
+msgid " - Modify repository info"
+msgstr ""
+
+msgctxt "#32029"
+msgid "Are you sure you want to discard change ?"
 msgstr ""
 
 msgctxt "#32031"

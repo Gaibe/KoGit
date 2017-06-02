@@ -15,7 +15,9 @@ class Main:
 
     def __init__(self):
         while True:
-            indexServer = dialog.select(__addonname__, [translate(32101)])
+#           To uncomment if repository server is added
+#           indexServer = dialog.select(__addonname__, [translate(32101)])
+            indexServer = 0
             if indexServer >= 0:
                 keyboard = xbmc.Keyboard('2sec', translate(32020))
                 keyboard.doModal()
@@ -53,6 +55,7 @@ class Main:
                                     break
                                 else:
                                     hasDownloaded = self.modifyRepoInfo()
+                                    xbmc.log(msg=str(hasDownloaded),level=xbmc.LOGERROR)
                                     if hasDownloaded == True:
                                         break
                             else:
@@ -90,38 +93,43 @@ class Main:
         resultHasChange = False
         hasDownloaded = False
         while True:
-            selectModifyList = [translate(32025) + ' ' + self.selectedResult.name,
-                    translate(32026) + ' ' + self.selectedResult.getRepoPathToAddon(),
+            selectModifyList = [translate(32025) + ' ' + self.selectedResult.addonName,
+                    translate(32026) + ' ' + self.selectedResult.name + '/' + self.selectedResult.addonPath,
                     translate(32011)]
-            indexModify = dialog.select(__addonname__+' - Modify repository info',selectModifyList)
+            indexModify = dialog.select(__addonname__+translate(32028),selectModifyList)
             if indexModify >= 0:
                 if indexModify == 0:
                     # Modify name
                     validNewName = False
                     while validNewName == False:
-                        newName = dialog.input(__addonname__,self.selectedResult.name,xbmcgui.INPUT_ALPHANUM)
+                        newName = dialog.input(__addonname__,self.selectedResult.addonName,xbmcgui.INPUT_ALPHANUM)
                         validNewName = True
                         if newName != '':
                             if tools.hasInvalidFilesCharacters(newName):
+                                # Check if name is valid for a folder
                                 validNewName = False
                                 dialog.ok(__addonname__,
                                     translate(32027) + '\n' + (', '.join(tools.invalidFilesCharacters)))
                             else:
                                 resultHasChange = True
-                                self.selectedResult.name = newName
+                                self.selectedResult.addonName = newName
                 elif indexModify == 1:
                     # Modify path
-                    dialog.browseSingle(0,__addonname__,)
+                    newPath = dialog.input(__addonname__,self.selectedResult.addonPath,xbmcgui.INPUT_ALPHANUM)
+                    resultHasChange = True
+                    self.selectedResult.addonPath = newPath
                 elif indexModify == 2:
                     # Download repo
                     self.download()
                     hasDownloaded = True
+                    break
             else:
                 if resultHasChange == True:
+                    # Ask if discard modification
                     discardChange = dialog.yesno(heading=__addonname__,
-                            line1='Are you sure you want to discard change ?',
-                            yeslabel='Discard',
-                            nolabel='Cancel')
+                            line1=translate(32029),
+                            yeslabel=translate(32014),
+                            nolabel=translate(32013))
                     if discardChange == True:
                         break
                 else:

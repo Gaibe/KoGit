@@ -2,7 +2,7 @@ from tools import translate
 
 class repositoryInfo:
 
-    def __init__(self,server, data):
+    def __init__(self, server, data):
         if server == 'github':
             self.setInfoFromGithub(data)
 
@@ -13,12 +13,17 @@ class repositoryInfo:
          + '\n' + translate(32026) + ' ' + self.getRepoPathToAddon()
 
     def getRepoPathToAddon(self):
-        return '/' + self.addonPath + '/'
+        path = '/' + self.name + '/'
+        if self.addonPath != '':
+            path = os.path.join(path, repository.addonPath)
+        return path
 
     def setInfoFromGithub(self,data):
         self.name = data['name']
         self.fullName = data['full_name']
         self.ownerName = data['owner']['login']
         self.addonName = data['name']
-        self.addonPath = data['name']
+        self.addonPath = ''
         self.defaultBranch = data['default_branch']
+        self.size = data['size']
+        self.dateCreation = data['created_at']

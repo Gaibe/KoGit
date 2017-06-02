@@ -29,13 +29,15 @@ def downloadRepository(repository):
         xbmc.log(msg=e.message, level=xbmc.LOGERROR)
         raise Exception(tools.translate(32103))
     try:
-        tmpFolderToUnzip = os.path.join(generatedTmpPath, repository.addonName)
-        pathToAddon = os.path.join(os.path.dirname(info.__addonpath__),repository.addonName)
-        tools.unzip(pathToZip,tmpFolderToUnzip)
-        folderName = os.listdir(tmpFolderToUnzip)[0]
-        xbmc.log(msg=os.path.join(tmpFolderToUnzip,folderName), level=xbmc.LOGERROR)
-        xbmc.log(msg=pathToAddon, level=xbmc.LOGERROR)
-        os.rename(os.path.join(tmpFolderToUnzip,folderName),pathToAddon)
+        tmpPathToUnzip = os.path.join(generatedTmpPath, repository.addonPath)
+        pathToAddon = os.path.join(os.path.dirname(info.__addonpath__), repository.addonName)
+        tools.unzip(pathToZip,generatedTmpPath)
+        os.remove(pathToZip)
+        folderName = os.listdir(generatedTmpPath)[0]
+        pathToDownloadedAddon = os.path.join(generatedTmpPath, folderName)
+        if repository.addonPath != '':
+            pathToDownloadedAddon = os.path.join(pathToDownloadedAddon, repository.addonPath)
+        os.rename(pathToDownloadedAddon, pathToAddon)
     except Exception as e:
         xbmc.log(msg=e.message, level=xbmc.LOGERROR)
         raise Exception(e.message)
